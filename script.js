@@ -1,16 +1,23 @@
 let numbers = document.querySelector('#numbers')
-let input = document.querySelector('input')
+
+let input = document.createElement('input')
+input.type ='number'
+input.value = 5
+input.min = '1'
+input.max = '10'
+numbers.append(input)
+
 let h3 = document.createElement('h3')
 h3.textContent = 5
 numbers.append(h3)
 
-let btnAdd = document.createElement('button')
-btnAdd.textContent = '+'
-numbers.append(btnAdd)
-
 let btnSubtract = document.createElement('button')
 btnSubtract.textContent ='-'
 numbers.append(btnSubtract)
+
+let btnSubtractTwo = document.createElement('button')
+btnSubtractTwo.textContent = '-2'
+numbers.append (btnSubtractTwo)
 
 let btnReset = document.createElement('button')
 btnReset.textContent = 'Reset'
@@ -20,9 +27,9 @@ let btnAddTwo = document.createElement('button')
 btnAddTwo.textContent = '+2'
 numbers.append(btnAddTwo)
 
-let btnSubtractTwo = document.createElement('button')
-btnSubtractTwo.textContent = '-2'
-numbers.append (btnSubtractTwo)
+let btnAdd = document.createElement('button')
+btnAdd.textContent = '+'
+numbers.append(btnAdd)
 
 let addPoints = document.createElement('button')
 addPoints.textContent = 'Įrašyti balą'
@@ -35,13 +42,13 @@ numbers.append(h4)
 let list = document.createElement('ul')
 numbers.append(list)
 
-
 btnAdd.addEventListener('click', add)
 btnSubtract.addEventListener('click', subtract)
 btnReset.addEventListener('click', reset)
 btnAddTwo.addEventListener('click', addTwo)
 btnSubtractTwo.addEventListener('click', subtractTwo)
 addPoints.addEventListener('click', addPointsAction)
+// input.addEventListener('input', inputAction)
 
 
 
@@ -58,13 +65,18 @@ function add(){
     h3.textContent++ 
     if (h3.textContent > 9){
         btnAdd.setAttribute('disabled', true)
+    }
+    if (h3.textContent > 8){
         btnAddTwo.setAttribute('disabled', true)
     }
-    if (h3.textContent > 1){
+    if (h3.textContent > 0){
         btnSubtract.removeAttribute('disabled')
+    }
+    if (h3.textContent > 1){
         btnSubtractTwo.removeAttribute('disabled')
     }
     color()
+    input.value = h3.textContent
 }
 
 
@@ -72,14 +84,19 @@ function add(){
 function subtract(){
     h3.textContent--
     if (h3.textContent < 2){
-        btnSubtract.setAttribute('disabled', true)
         btnSubtractTwo.setAttribute('disabled', true)
+    }
+    if (h3.textContent < 1){
+        btnSubtract.setAttribute('disabled', true)
+    }
+    if (h3.textContent < 9){
+        btnAddTwo.removeAttribute('disabled')
     }
     if (h3.textContent < 10){
         btnAdd.removeAttribute('disabled')
-        btnAddTwo.removeAttribute('disabled')
     }
     color()
+    input.value = h3.textContent
 }
 
 function reset(){
@@ -93,6 +110,7 @@ function reset(){
         btnSubtractTwo.removeAttribute('disabled')
     }
     color()
+    input.value = h3.textContent
 }
 
 function addTwo(){
@@ -101,12 +119,15 @@ function addTwo(){
         btnAddTwo.setAttribute('disabled', true)
         btnAdd.setAttribute('disabled', true)
     }
+    if (h3.textContent > 8){
+        btnAddTwo.setAttribute('disabled', true)
+    }
     if (h3.textContent > 1){
         btnSubtractTwo.removeAttribute('disabled')
         btnSubtract.removeAttribute('disabled')
     }
-    
     color()
+    input.value = h3.textContent
 }
 
 function subtractTwo(){
@@ -120,7 +141,7 @@ function subtractTwo(){
         btnAdd.removeAttribute('disabled')
     }
     color()
-
+    input.value = h3.textContent
 }
 
 function addPointsAction(){
@@ -144,5 +165,6 @@ function addPointsAction(){
     }
 
 }
+
 
 
